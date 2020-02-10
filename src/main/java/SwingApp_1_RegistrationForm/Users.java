@@ -1,5 +1,4 @@
-package g_gui.SwingApp_1_RegistrationForm;
-
+package SwingApp_1_RegistrationForm;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,43 +10,51 @@ public class Users {
     static int idCounter;
     static List<Users> listUsers = new LinkedList<>();
 
-    private int id;
+    private int IDUsers=0;
     private String login;
     private String password;
-    private Sex sex;
+    private String sex;
     private List<String> listInterests;
 
   static  {
-      importUsers_fromTXT();
-      /*  new Users("JanKowalski", "janeczek5", Sex.MAN, Arrays.asList("fishing","cooking","drinking"));
-        new Users("JagodaWscibska", "jagodka5", Sex.WOMAN, Arrays.asList("fishing","cooking","drinking"));
-        new Users("JanMariaRokita", "kroljesttylko1", Sex.MAN, Arrays.asList("fishing","cooking","drinking"));
-        new Users("JurekOgorek", "party69", Sex.OTHER, Arrays.asList("fishing","cooking","drinking"));
-*/
+      //importUsers_fromTXT();
+      SwingApp_1_repository.isTablesInDBCreated();
+      importUsers_fromDB();
+//      SwingApp_1_repository.addUserToDB(new Users("JanKowalski", "janeczek5", "Man", Arrays.asList("fishing","cooking","drinking")));
+//      SwingApp_1_repository.addUserToDB(new Users("JagodaWscibska", "jagodka5", "Woman", Arrays.asList("fishing","cooking","drinking")));
+//      SwingApp_1_repository.addUserToDB(new Users("JanMariaRokita", "kroljesttylko1", "MAN", Arrays.asList("fishing","cooking","drinking")));
+//      SwingApp_1_repository.addUserToDB(new Users("JurekOgorek", "party69", "Other", Arrays.asList("fishing","cooking","drinking")));
+
     }
-        enum Sex {
+/*        enum Sex {
         MAN("Man"), WOMAN("Woman"), OTHER("Other");
         private String string;
         Sex(String string) {
             this.string = string;
         }
+            public String getString() { return string; }
+            public void setString(String string) { this.string = string; }
+        }*/
+
+    public Users() {
+        this.IDUsers = ++idCounter;
     }
 
-    public Users(String login, String password, Sex sex, List<String> listInterests) {
-        this.id = idCounter++;
+    public Users(String login, String password, String sex, List<String> listInterests) {
+        this();
         this.login = login;
         this.password = password;
-        this.sex = sex;
+        this.sex=sex;
         this.listInterests = listInterests;
         listUsers.add(this);
     }
 
-    public int getId() {
-        return id;
+    public int getIDUsers() {
+        return IDUsers;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIDUsers(int IDUsers) {
+        this.IDUsers = IDUsers;
     }
 
     public String getLogin() {
@@ -66,11 +73,11 @@ public class Users {
         this.password = password;
     }
 
-    public Sex getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Sex sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -123,14 +130,24 @@ public class Users {
             System.out.println(substringId);
             Integer id = Integer.parseInt(substringId);
             for (Users user: listUsers)
-                if (user.getId()==id) listUsersToRemove.add(user);
+                if (user.getIDUsers()==id) listUsersToRemove.add(user);
         }
         for (Users user: listUsersToRemove) {
             listUsers.remove(user);
         }
         scanner1.close();
     }
-    static void importUsers_fromTXT() {
+    public static void importUsers_fromDB () {
+        List<Users> listOfUsersFromDB = SwingApp_1_repository.getAllUsersFromDB();
+        for (Users user:listOfUsersFromDB) {
+
+        }
+        Users.setListUsers(listOfUsersFromDB);
+
+    }
+
+
+    public static void importUsers_fromTXT() {
         String path1 = "D:\\tempp\\listUsers.txt";
 
         File file1 = new File(path1);
@@ -150,7 +167,7 @@ public class Users {
             String substringSex = stringArray1[2].substring(stringArray1[2].indexOf('<') + 1, stringArray1[2].indexOf('>'));
             String substringInterests = stringArray1[3].substring(stringArray1[3].indexOf('[') + 1, stringArray1[3].indexOf(']'));
 
-            Users user = new Users(substringLogin,substringPassword,Sex.valueOf(substringSex), Arrays.asList(""));
+            Users user = new Users(substringLogin,substringPassword,substringSex, Arrays.asList(""));
             String[] stringArray2 = substringInterests.split(", ");
             List<String> listInterests = new LinkedList<>();
             for (int i = 0; i <stringArray2.length ; i++) {

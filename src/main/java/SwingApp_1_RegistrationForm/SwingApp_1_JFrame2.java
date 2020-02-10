@@ -1,5 +1,4 @@
-package g_gui.SwingApp_1_RegistrationForm;
-
+package SwingApp_1_RegistrationForm;
 import javax.swing.*;
 
 public class SwingApp_1_JFrame2 extends JFrame {

@@ -7,6 +7,27 @@
     <groupId>org.example</groupId>
     <artifactId>_userAuthorisation_SWING-JDBC</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <shutdown>kill</shutdown>
+                    <!-- Use it if required-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <modules>
 
+    </modules>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+    </properties>
 
 </project>

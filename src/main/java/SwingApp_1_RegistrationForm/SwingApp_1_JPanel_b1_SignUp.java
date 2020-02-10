@@ -1,5 +1,4 @@
-package g_gui.SwingApp_1_RegistrationForm;
-
+package SwingApp_1_RegistrationForm;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -104,13 +103,13 @@ public class SwingApp_1_JPanel_b1_SignUp extends JPanel {
 
         jRadioButton2 = new JRadioButton("Woman");
         jRadioButton2.setText("Woman");
-        jRadioButton2.setBounds(190,300 , 120,20);
+        jRadioButton2.setBounds(290,300 , 120,20);
         buttonGroup1.add(jRadioButton2);
         add(jRadioButton2);
 
         jRadioButton3 = new JRadioButton("Other");
         jRadioButton3.setText("Other");
-        jRadioButton3.setBounds(290,300 , 120,20);
+        jRadioButton3.setBounds(490,300 , 120,20);
         buttonGroup1.add(jRadioButton3);
         add(jRadioButton3);
 
@@ -189,7 +188,14 @@ public class SwingApp_1_JPanel_b1_SignUp extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
            if (isCorrectPassword()){
-               new Users(jTextField1.getText(), jTextField2.getText(), Users.Sex.MAN, Arrays.asList(jCheckBox1.getText(),jCheckBox2.getText()));
+               String sex;
+               if(jRadioButton1.isSelected()) sex = "Man";
+               else if(jRadioButton2.isSelected()) sex = "Woman";
+               else sex = "Other";
+               Users user = new Users(jTextField1.getText(), jTextField2.getText(), sex, Arrays.asList(jCheckBox1.getText(),jCheckBox2.getText()));
+               JOptionPane.showMessageDialog(null, "UserCreated");
+               SwingApp_1_repository.addUserToDB(user);
+               SwingApp_1_JPanel_c1_Users.fillDefaultListModel();
            }
       }
     }

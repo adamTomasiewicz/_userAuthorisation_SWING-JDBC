@@ -1,5 +1,4 @@
-package g_gui.SwingApp_1_RegistrationForm;
-
+package SwingApp_1_RegistrationForm;
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,7 +10,7 @@ public class AuthorizationFormMain {
                 SwingApp_1_JFrame1 swingApp_1_JFrame1 = new SwingApp_1_JFrame1();
                 swingApp_1_JFrame1.setVisible(true);
                 swingApp_1_JFrame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+            SwingApp_1_repository.isTablesInDBCreated();
             }
         });
     }

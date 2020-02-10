@@ -1,7 +1,5 @@
-package g_gui.SwingApp_1_RegistrationForm;
-
+package SwingApp_1_RegistrationForm;
 import javax.swing.*;
-import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,23 +56,23 @@ public class SwingApp_1_JPanel_c1_Users extends JPanel {
         add(jTextField3);
 
         // add button - icon: +
-        JButton jButtonAdd = new JButton("add user");
-        jButtonAdd.setBounds(400, 400, 40, 40);
+        JButton jButtonAdd = new JButton("add");
+        jButtonAdd.setBounds(400, 400, 80, 40);
         jButtonAdd.addActionListener(new ActionButtonAdd());
         add(jButtonAdd);
         // remove button - icon: -
-        JButton jButtonRemove = new JButton("remove user");
-        jButtonRemove.setBounds(400, 450, 40, 40);
+        JButton jButtonRemove = new JButton("remove");
+        jButtonRemove.setBounds(400, 450, 80, 40);
         jButtonRemove.addActionListener(new ActionButtonRemove());
         add(jButtonRemove);
         // edit button - icon: pencil
-        JButton jButtonEdit = new JButton("edit user");
+        JButton jButtonEdit = new JButton("edit");
         jButtonEdit.setBounds(480, 420, 50, 50);
         jButtonEdit.addActionListener(new ActionButtonEdit());
         add(jButtonEdit);
 
         //save button
-        JButton jButtonSave = new JButton("save data");
+        JButton jButtonSave = new JButton("save");
         jButtonSave.setBounds(480, 480, 50, 50);
         jButtonSave.addActionListener(new ActionButtonSave());
         add(jButtonSave);
@@ -95,10 +93,11 @@ public class SwingApp_1_JPanel_c1_Users extends JPanel {
     class ActionButtonAdd implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
-            Users userToAdd = new Users(jTextField1.getText(),jTextField2.getText(), Users.Sex.valueOf(jTextField3.getText().equals("SEX")?"OTHER":jTextField3.getText()), Arrays.asList(""));
+            Users userToAdd = new Users(jTextField1.getText(),jTextField2.getText(), jTextField3.getText().equals("SEX")?"OTHER":jTextField3.getText(), Arrays.asList(""));
             System.out.println("created user: "+userToAdd);
+            SwingApp_1_repository.addUserToDB(userToAdd);
             add(fillDefaultListModel());
+
         }
     }
     class ActionButtonRemove implements ActionListener {
@@ -117,7 +116,7 @@ public class SwingApp_1_JPanel_c1_Users extends JPanel {
            Users user = Users.listUsers.get(jList1.getSelectedIndex());
            user.setLogin(jTextField1.getText());
            user.setPassword(jTextField2.getText());
-           user.setSex(Users.Sex.valueOf(jTextField3.getText().equals("SEX")?"OTHER":jTextField3.getText()));
+           user.setSex((jTextField3.getText().equals("SEX")?"OTHER":jTextField3.getText()));
             add(fillDefaultListModel());
             EventQueue.invokeLater(new Runnable() {
                 @Override

@@ -1,5 +1,4 @@
-package g_gui.SwingApp_1_RegistrationForm;
-
+package SwingApp_1_RegistrationForm;
 import javax.swing.*;
 import java.awt.*;
 

@@ -1,5 +1,4 @@
-package g_gui.SwingApp_1_RegistrationForm;
-
+package SwingApp_1_RegistrationForm;
 public enum Alerts {
     //login alerts
     SUCCESSFULLY_LOGGED_IN("Successfully logged in"),

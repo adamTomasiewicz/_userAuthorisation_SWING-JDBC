@@ -1,5 +1,4 @@
-package g_gui.SwingApp_1_RegistrationForm;
-
+package SwingApp_1_RegistrationForm;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -56,20 +55,28 @@ public class SwingApp_1_JPanel_a1_SignIn extends JPanel {
 
         // buttons
         //clean
-        JButton jButton1 = new JButton("submit");
+        JButton jButton1 = new JButton("wipe");
         jButton1.setBounds(150, 440, 150, 50);
-        jButton1.addActionListener(new ActionSubmitSignIn());
+        jButton1.addActionListener(new ActionButtonWipe());
         // jButton1.addActionListener(new SwingApp_1_JPanel_b1_SignUp.ActionButtonWipeForm()); clean form
         add(jButton1);
         //register
-        JButton jButton2 = new JButton("submit");
+        JButton jButton2 = new JButton("login");
         jButton2.setBounds(350, 440, 150, 50);
-        jButton2.addActionListener(new ActionSwitchToSignUp());
+        jButton2.addActionListener(new ActionButtonSignIn());
         add(jButton2);
 
     }
+    class ActionButtonWipe implements ActionListener {
 
-    class ActionSubmitSignIn implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            jTextField1_login.setText("");
+            jPasswordField1_password.setText("");
+        }
+
+    }
+    class ActionButtonSignIn implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -81,32 +88,19 @@ public class SwingApp_1_JPanel_a1_SignIn extends JPanel {
                     if (user.getLogin().equals(login) & user.getPassword().equals(password)) {
                         jLabel3_result.setText(String.valueOf(Alerts.SUCCESSFULLY_LOGGED_IN));
                         jLabel3_result.setForeground(Color.GREEN);
-                    } else {
-                        System.out.println("login: " + login + " " + "password: " + password);
-                        System.out.println("getlogin: " + user.getLogin() + " " + "getpassword: " + user.getPassword());
-                        jLabel3_result.setText(String.valueOf(Alerts.WRONG_LOGIN_OR_PASSWORD));
-                        jLabel3_result.setForeground(Color.RED);
+                        JOptionPane.showMessageDialog(null, "You have successfully logged in.");
                     }
+
                 }
             } else {
-                System.out.println(Alerts.EMPTY_LOGIN_OR_PASSWORD);
+                JOptionPane.showMessageDialog(null, "Empty Login Or Password");
             }
         }
 
-        ;
-    }
-
-    class ActionSwitchToSignUp implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          //  ProjectMain_2_JFrame1.
-
-        }
-
-
 
     }
+
+
 }
 
 
